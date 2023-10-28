@@ -3,15 +3,15 @@ let DirtTile = () => <div className =
 />;
 
 let SproutTile = () => <div className =
-  "w-[25px] h-[25px] bg-[#77ff00] hover:bg-[#000000] hover:cursor-pointer"
+  "w-[25px] h-[25px] bg-[#77ff00] hover:bg-[#000000] hover:cursor-pointer rounded-full"
 />;
 
 let TeenTile = () => <div className = 
-  "w-[25px] h-[25px] bg-[#14911f] hover:bg-[#000000] hover:cursor-pointer"
+  "w-[25px] h-[25px] bg-[#14911f] hover:bg-[#000000] hover:cursor-pointer rounded-full"
 />;
 
 let AdultTile = () => <div className = 
-  "w-[25px] h-[25px] bg-[#ff00e6] hover:bg-[#000000] hover:cursor-pointer"
+  "w-[25px] h-[25px] bg-[#ff00e6] hover:bg-[#000000] hover:cursor-pointer rounded-full"
 />;
 
 let tileTypes  = [ DirtTile, SproutTile, TeenTile, AdultTile ];

@@ -6,7 +6,7 @@ type TileStates = Array<Array<number>>
 
 let updateTestCase: TileStates = []
 for (let i = 0; i < 25; i++) {
-  updateTestCase.push([...Array(40)].map(() => Math.round(Math.random() * 0.6)));
+  updateTestCase.push([...Array(40)].map(() => Math.round(Math.random() * 0.55)));
 }
 
 export default function App() {
@@ -16,7 +16,7 @@ export default function App() {
     const interval = setInterval(() => {
       setTileStates(updateTileStates(tileStates));
       console.log(1);
-    }, 1000);
+    }, 500);
     return () => clearInterval(interval);
   }, [tileStates]);
 
@@ -53,7 +53,7 @@ function updateTileStates(tileStates: TileStates): TileStates {
         } else {
           copy[x][y] = 0;
         }
-      } else if (num_alive == 3) {
+      } else if (num_alive > 2) {
         copy[x][y] = 1;
       }
     }
