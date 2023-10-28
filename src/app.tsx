@@ -15,7 +15,6 @@ export default function App() {
   useEffect(() => {
     const interval = setInterval(() => {
       setTileStates(updateTileStates(tileStates));
-      console.log(1);
     }, 500);
     return () => clearInterval(interval);
   }, [tileStates]);
