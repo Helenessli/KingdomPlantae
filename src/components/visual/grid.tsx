@@ -7,7 +7,7 @@ export default function Grid({ tileStates }: { tileStates: Array<Array<number>> 
   return (
     <div>
       {[...Array(h)].map( (_v, i) => 
-        <div className="flex flex-row" key = { i } >
+        <div className = "flex flex-row" key = { i } >
           {[...Array(w)].map( (_v, j) => 
             <Tile tileState = { tileStates[i][j] } key = { j } /> 
           )}
