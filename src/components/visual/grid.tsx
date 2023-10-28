@@ -1,25 +1,18 @@
-import React from "react";
+import Tile from "./tile";
 
-import Tile from "./plantStates/tile";
-
-import "./grid.css";
-
-export default function Grid(
-  { height, width, tileStates }:
-  { height: number, width: number, tileStates: Array<Array<number>> }
-) {
-  let tiles: Array<React.ReactNode> = [];
-  for (let i = 0; i < height; i++) {
-    let row: Array<React.ReactNode> = [];
-    for (let j = 0; j < width; j++) {
-      row.push(<Tile tileState = { tileStates[i][j] } />)
-    }
-    tiles.push(<div className = "Row" children = { row } />);
-  }
+export default function Grid({ tileStates }: { tileStates: Array<Array<number>> }) {
+  let h = tileStates.length;
+  let w = (tileStates.length == 0) ? 0 : tileStates[0].length;
 
   return (
-    <div className = "Grid" >
-      {tiles}
+    <div>
+      {[...Array(h)].map( (_v, i) => 
+        <div className="flex flex-row" key = { i } >
+          {[...Array(w)].map( (_v, j) => 
+            <Tile tileState = { tileStates[i][j] } key = { j } /> 
+          )}
+        </div>
+      )}
     </div>
   );
 }
