@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+
+import App from './app';
+
 import './index.css';
 
 const root = ReactDOM.createRoot(
@@ -7,6 +10,6 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <div className='bg-black w-[200px] h-[100px]'>a</div>
+    <App/>
   </React.StrictMode>
 );
