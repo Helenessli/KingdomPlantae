@@ -1,6 +1,8 @@
-export default function Tile({state}:Number) : any
+export default function Tile(state:Number) : any
 {
     return(
-        <div></div>
+        <div>
+            {state == 0? <></> : <></> }
+        </div>
     )
 }
