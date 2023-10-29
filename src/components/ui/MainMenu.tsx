@@ -13,9 +13,11 @@ export default function MainMenu() {
     <>
     {playStartGame? <App/> :
     
-    <div className="main-menu">
-      <h1>Welcome to Kingdom Plantae</h1>
-      <button onClick={startGame}>Start Game</button>
+    <div className="main-menu flex justify-center items-center w-screen h-screen" >
+      <img src="MainMenu.png" width="900" height="850" alt="alt" ></img>
+      <button className="absolute mt-[300px] mr-[400px]" onClick={startGame}>
+        <img alt="startButton" src="playGame.png"></img>
+      </button>
     </div>
     }
     </>

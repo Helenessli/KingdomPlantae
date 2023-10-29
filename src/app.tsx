@@ -16,22 +16,28 @@ export default function App() {
   const [tickIntervalMs, setTickIntervalMs] = useState(500);
   const [lastDir, setLastDir] = useState("unknown");
   const [foodCnt, setFoodCnt] = useState(0);
+  const [tickPaused, setTickPaused] = useState(false);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.name === "tickInterval") {
+      setTickIntervalMs((tickIntervalMs + 800) % 1200);
+    }
+    else if (event.target.name === "tickPaused") {
+      setTickPaused(!tickPaused);
+    }
+  }
 
   return (
-    <div className = "w-screen h-screen flex content-center justify-center flex-wrap" >
-      <Board initDisplayData = { updateTestCase } initMachineData = { initMachineData } tickInterval = { tickIntervalMs } 
-      gridWidth = {40}
-      gridHeight = {25}
-      lastDir = {lastDir}
-      setLastDir = {setLastDir}
-      foodCnt = {foodCnt}
-      setFoodCnt = {setFoodCnt}
+    <div className="w-screen h-screen flex content-center justify-center flex-wrap" >
+      <Board initDisplayData={updateTestCase} initMachineData={initMachineData} tickInterval={tickIntervalMs} tickPaused={tickPaused} handleChange={handleChange}
+        gridWidth={40}
+        gridHeight={25}
+        lastDir={lastDir}
+        setLastDir={setLastDir}
+        foodCnt={foodCnt}
+        setFoodCnt={setFoodCnt}
       />
-      <button className = "border-black border-2 rounded-xl w-14 h-10 mx-3"
-        onClick={() => setTickIntervalMs((tickIntervalMs+800)%1200)}>
-          {(tickIntervalMs === 100? "3x" : (tickIntervalMs === 500? "2x" : "1x"))}
-        </button>
-
+      <ControlButtons tickIntervalMs={tickIntervalMs} tickPaused={tickPaused} handleChange={handleChange} />
     </div>
   );
 }

@@ -9,19 +9,21 @@ type DisplayData = number[][];
 type MachineData = number[][];
 
 export default function Board(
-  { initDisplayData, initMachineData, tickInterval, 
+  { initDisplayData, initMachineData, tickInterval, tickPaused, handleChange,
     gridWidth,
     gridHeight,
     lastDir,
     setLastDir,
     foodCnt,
-    setFoodCnt}: 
-  { initDisplayData: DisplayData, initMachineData: MachineData, tickInterval: number, gridWidth: number,
-    gridHeight: number,
-    lastDir: string,
-    setLastDir: any,
-    foodCnt: number,
-    setFoodCnt: any,}
+    setFoodCnt }:
+    {
+      initDisplayData: DisplayData, initMachineData: MachineData, tickInterval: number, tickPaused: boolean, gridWidth: number, handleChange : any
+      gridHeight: number,
+      lastDir: string,
+      setLastDir: any,
+      foodCnt: number,
+      setFoodCnt: any,
+    }
 ) {
   const [ displayData, setDisplayData ] = useState(initDisplayData);
   const [ machineData, setMachineData ] = useState(initMachineData);
@@ -41,6 +43,9 @@ export default function Board(
         setMachineData(m);
         setUpdateTimes(updateTimes + 1);
       }
+      // else if (updateTimes === 20){
+      //   handleChange();
+      // }
     }, tickInterval);
     return () => clearInterval(interval);
   }, [displayData, machineData, updateTimes]);
@@ -50,14 +55,14 @@ export default function Board(
   />;
 }
 
-function updateBoard(displayData: DisplayData, machineData: MachineData, gridWidth: number, gridHeight: number, lastDir: string, setLastDir: any, foodCnt: number, setFoodCnt: any, ) {
+function updateBoard(displayData: DisplayData, machineData: MachineData, gridWidth: number, gridHeight: number, lastDir: string, setLastDir: any, foodCnt: number, setFoodCnt: any,) {
   displayData = conway(displayData);
-  [ machineData, displayData ] = machine(machineData, displayData, gridWidth,
+  [machineData, displayData] = machine(machineData, displayData, gridWidth,
     gridHeight,
     lastDir,
     setLastDir,
     foodCnt,
     setFoodCnt);
   displayData = razor(machineData, displayData);
-  return [ displayData, machineData ];
+  return [displayData, machineData];
 }

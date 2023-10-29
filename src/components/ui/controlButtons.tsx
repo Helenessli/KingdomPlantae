@@ -7,13 +7,13 @@ export default function ControlButtons({ tickIntervalMs, tickPaused, handleChang
         {(tickIntervalMs === 100 ? "3x" : (tickIntervalMs === 500 ? "2x" : "1x"))}
       </button>
       <button className="border-black border-2 rounded-xl w-14 h-10 m-2" onClick={handleChange} name="tickPaused">
-        {tickPaused? "⏸" : "▶"}
+        {tickPaused ? "▶" : "⏸"}
       </button>
-      <br/>
+      <br />
       <button className="border-black border-2 rounded-xl w-28 h-10 m-2" onClick={handleChange} name="tickPaused">
         Place bomb
       </button>
-      <br/>
+      <br />
       <button className="border-black border-2 rounded-xl w-28 h-10 m-2" onClick={handleChange} name="tickPaused">
         Place seed
       </button>
