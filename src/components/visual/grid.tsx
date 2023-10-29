@@ -7,7 +7,10 @@ import "./grid.css";
 
 type DisplayData = number[][];
 
-export default function Grid({ displayData }: { displayData: DisplayData }) {
+export default function Grid(
+  { displayData, pause }: 
+  { displayData: DisplayData, pause: boolean }
+) {
   let h = displayData.length;
   let w = (displayData.length == 0) ? 0 : displayData[0].length;
   
@@ -24,7 +27,9 @@ export default function Grid({ displayData }: { displayData: DisplayData }) {
                 return <MachineBody key = { j } />;
               if (tileType == 8 || tileType == 9) 
                 return <Razor hasBomb = { tileType == 9 } key = { j } />; 
-              return <Plant plantType = { tileType % 10 } hasBomb = { tileType >= 10 } key = { j } />;
+              return <Plant plantType = { tileType % 10 } 
+                hasBomb = { tileType >= 10 } pause = { pause } key = { j } 
+              />;
             })()
           )}
         </div>

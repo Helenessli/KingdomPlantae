@@ -8,6 +8,8 @@ import razor from "../logics/razor";
 type DisplayData = number[][];
 type MachineData = number[][];
 
+let updateTimes = 0;
+
 export default function Board(
   { initDisplayData, initMachineData, tickInterval }: 
   { initDisplayData: DisplayData, initMachineData: MachineData, tickInterval: number }
@@ -17,14 +19,17 @@ export default function Board(
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const [ d, m ] = updateBoard(displayData, machineData);
-      setDisplayData(d);
-      setMachineData(m);
+      if (updateTimes < 20) {
+        const [ d, m ] = updateBoard(displayData, machineData);
+        setDisplayData(d);
+        setMachineData(m);
+        updateTimes++;
+      }
     }, tickInterval);
     return () => clearInterval(interval);
   }, [displayData, machineData]);
 
-  return <Grid displayData = { displayData } />;
+  return <Grid displayData = { displayData } pause = { updateTimes == 20 } />;
 }
 
 function updateBoard(displayData: DisplayData, machineData: MachineData ) {
