@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import MainMenu from './components/MainMenu';
 
 import App from './app';
 

@@ -3,9 +3,9 @@ import { useState, useEffect } from "react";
 import Grid from "./components/visual/grid";
 import TickSlider from "./components/visual/tickSlider";
 
-type TileStates = Array<Array<number>>
+type TileStates = Array<Array<number>>;
 
-let updateTestCase: TileStates = []
+const updateTestCase: TileStates = [];
 for (let i = 0; i < 25; i++) {
   updateTestCase.push([...Array(40)].map(() => Math.round(Math.random() * 0.55)));
 }
@@ -48,14 +48,14 @@ function updateTileStates(tileStates: TileStates): TileStates {
       }
 
       // Update tileStates based on number of neighbors
-      let num_alive = neighbors[1] + neighbors[2] + neighbors[3];
+      let numAlive = neighbors[1] + neighbors[2] + neighbors[3];
       if (tileStates[x][y] != 0) {
-        if (tileStates[x][y] != 3 && (num_alive == 2 || num_alive == 3 || num_alive == 4)) {
+        if (tileStates[x][y] != 3 && (numAlive == 2 || numAlive == 3 || numAlive == 4)) {
           copy[x][y] = tileStates[x][y] + 1;
         } else {
           copy[x][y] = 0;
         }
-      } else if (num_alive > 2) {
+      } else if (numAlive > 2) {
         copy[x][y] = 1;
       }
     }

@@ -1,22 +1,26 @@
-let DirtTile = () => <div className =
+const DirtTile = () => <div className =
   "w-[25px] h-[25px] bg-[#a7594c] hover:bg-[#814a3f] hover:cursor-pointer"
 />;
 
-let SproutTile = () => <div className =
-  "w-[25px] h-[25px] bg-[#77ff00] hover:bg-[#a0a0a0] hover:cursor-pointer rounded-full"
+const SproutTile = () => <div className = {
+  "w-0 h-0 border-[12.5px] border-solid border-transparent border-b-[#77ff00] relative top-[-12.5px] \
+  after:content-[''] after:absolute after:left-[-12.5px] after:top-[12.5px] after:w-0 after:h-0 \
+  after:border-[12.5px] after:border-solid after:border-transparent after:border-t-[#77ff00]"}
 />;
 
-let TeenTile = () => <div className = 
-  "w-[25px] h-[25px] bg-[#0d7416] hover:bg-[#a0a0a0] hover:cursor-pointer rounded-full"
+const TeenTile = () => <div className = {
+  "w-0 h-0 border-[12.5px] border-solid border-transparent border-b-[#14911f] relative top-[-12.5px] \
+  after:content-[''] after:absolute after:left-[-12.5px] after:top-[12.5px] after:w-0 after:h-0 \
+  after:border-[12.5px] after:border-solid after:border-transparent after:border-t-[#14911f]"}
 />;
 
-let AdultTile = () => <div className="bg-[#ff0000]">
-  <div className = 
-  "w-[25px] h-[25px] bg-[#ffb61a] hover:bg-[#a0a0a0] hover:cursor-pointer rounded-full"
-/>
-</div>;
+const AdultTile = () => <div className = {
+  "w-0 h-0 border-[12.5px] border-solid border-transparent border-b-[#ff00e6] relative top-[-12.5px] \
+  after:content-[''] after:absolute after:left-[-12.5px] after:top-[12.5px] after:w-0 after:h-0 \
+  after:border-[12.5px] after:border-solid after:border-transparent after:border-t-[#ff00e6]"}
+/>;
 
-let tileTypes  = [ DirtTile, SproutTile, TeenTile, AdultTile ];
+const tileTypes = [ DirtTile, SproutTile, TeenTile, AdultTile ];
 
 export default function Tile({ tileState }: { tileState: number }) {
   return tileTypes[tileState]();
