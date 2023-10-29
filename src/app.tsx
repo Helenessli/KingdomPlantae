@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import Board from "./components/board";
+import ControlButtons from "./components/ui/controlButtons";
 
 type DisplayData = number[][];
 
@@ -30,6 +31,11 @@ export default function App() {
         onClick={() => setTickIntervalMs((tickIntervalMs+800)%1200)}>
           {(tickIntervalMs === 100? "3x" : (tickIntervalMs === 500? "2x" : "1x"))}
         </button>
+
     </div>
   );
 }
+// <button className="border-black border-2 rounded-xl w-14 h-10 mx-3"
+// onClick={() => setTickIntervalMs((tickIntervalMs + 800) % 1200)}>
+// {(tickIntervalMs === 100 ? "3x" : (tickIntervalMs === 500 ? "2x" : "1x"))}
+// </button>

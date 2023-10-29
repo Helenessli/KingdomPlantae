@@ -57,6 +57,5 @@ function updateBoard(displayData: DisplayData, machineData: MachineData, gridWid
     foodCnt,
     setFoodCnt);
   displayData = razor(machineData, displayData);
-
   return [ displayData, machineData ];
 }
