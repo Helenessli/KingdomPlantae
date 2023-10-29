@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 import Grid from "./components/visual/grid";
+import TickSlider from "./components/visual/tickSlider";
 
 type TileStates = Array<Array<number>>;
 
@@ -11,17 +12,19 @@ for (let i = 0; i < 25; i++) {
 
 export default function App() {
   const [tileStates, setTileStates] = useState(updateTestCase);
+  const [tickIntervalMs, setTickIntervalMs] = useState(50);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setTileStates(updateTileStates(tileStates));
-    }, 500);
+    }, tickIntervalMs);
     return () => clearInterval(interval);
   }, [tileStates]);
 
   return (
-    <div className = "w-screen h-screen flex content-center justify-center flex-wrap" >
-      <Grid tileStates = {tileStates} />
+    <div className="w-screen h-screen flex content-center justify-center flex-wrap" >
+      <Grid tileStates={tileStates} />
+      <TickSlider tickIntervalMs={500} setTickIntervalMs={setTickIntervalMs}/>
     </div>
   );
 }
@@ -34,12 +37,12 @@ function updateTileStates(tileStates: TileStates): TileStates {
   for (let x = 0; x < h; x++) {
     for (let y = 0; y < w; y++) {
       // Get number of neighbors for state 0, 1, 2, 3
-      let neighbors = [ 0, 0, 0, 0 ];
+      let neighbors = [0, 0, 0, 0];
       for (let i = -1; i <= 1; i++) {
         for (let j = -1; j <= 1; j++) {
-          if (0 <= x + i && x + i < h && 
-              0 <= y + j && y + j < w ) {
-            neighbors[tileStates[x+i][y+j]]++;
+          if (0 <= x + i && x + i < h &&
+            0 <= y + j && y + j < w) {
+            neighbors[tileStates[x + i][y + j]]++;
           }
         }
       }
