@@ -6,23 +6,30 @@ import machine from "../logics/machine";
 import razor from "../logics/razor";
 
 type DisplayData = number[][];
+type MachineData = number[][];
 
-export default function Board({ initialData } : { initialData : DisplayData }) {
-  const [displayData, setDisplaydata] = useState(initialData);
+export default function Board(
+  { initDisplayData, initMachineData, tickInterval }: 
+  { initDisplayData: DisplayData, initMachineData: MachineData, tickInterval: number }
+) {
+  const [ displayData, setDisplayData ] = useState(initDisplayData);
+  const [ machineData, setMachineData ] = useState(initMachineData);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setDisplaydata(updateDisplayData(displayData));
-    }, 500);
+      const [ d, m ] = updateBoard(displayData, machineData);
+      setDisplayData(d);
+      setMachineData(m);
+    }, tickInterval);
     return () => clearInterval(interval);
-  }, [displayData]);
+  }, [displayData, machineData]);
 
   return <Grid displayData = { displayData } />;
 }
 
-function updateDisplayData(displayData: DisplayData): DisplayData {
+function updateBoard(displayData: DisplayData, machineData: MachineData ) {
   displayData = conway(displayData);
   displayData = machine(displayData);
-  displayData = razor(displayData);
-  return displayData;
+  displayData = razor(machineData, displayData);
+  return [ displayData, machineData ];
 }
