@@ -29,7 +29,7 @@ export default function Board(
 
 function updateBoard(displayData: DisplayData, machineData: MachineData ) {
   displayData = conway(displayData);
-  [ displayData, machineData ] = machine(machineData, displayData);
+  [ machineData, displayData ] = machine(machineData, displayData);
   displayData = razor(machineData, displayData);
   return [ displayData, machineData ];
 }
