@@ -11,6 +11,6 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <MainMenu/>
+    <App />
   </React.StrictMode>
 );
