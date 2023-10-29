@@ -4,6 +4,8 @@ import Grid from "./components/visual/grid";
 
 type TileStates = Array<Array<number>>
 
+
+
 let updateTestCase: TileStates = []
 for (let i = 0; i < 25; i++) {
   updateTestCase.push([...Array(40)].map(() => Math.round(Math.random() * 0.55)));

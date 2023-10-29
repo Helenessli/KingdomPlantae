@@ -8,9 +8,6 @@ const gridWidth = 50;
 
 /* DO NOT COPY PASTE ANY CODE ABOVE THIS LINE */ 
 
-const [bodyLength, setBodyLength] = useState(1);
-
-
 const directionMove: any = 
 {
   "up":    [0, 1],
@@ -18,8 +15,6 @@ const directionMove: any =
   "right": [1, 0],
   "left":  [-1, 0]
 }
-
-let arr:any = []
 
 function movementDecision ()
 {
