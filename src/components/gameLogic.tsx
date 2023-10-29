@@ -1,5 +1,6 @@
 export function updateBoard(
   monster: number[][],
+  setMonster: any,
   tileStates: number[][],
   setTileStates: any,
   updateTileStates: any,
@@ -10,7 +11,9 @@ export function updateBoard(
   foodCnt: number,
   setFoodCnt: any,
 ) {
-  const tileStatesCopy:any = [...tileStates];
+  let tileStatesCopy:any = [...tileStates];
+
+  console.log(tileStatesCopy)
 
   const directionMove: any = {
     down: [0, 1],
@@ -139,6 +142,7 @@ export function updateBoard(
       }
     }
     setLastDir(dir);
+    console.log(dir)
     return dir;
   }
   function moveMonster( 
@@ -147,7 +151,7 @@ export function updateBoard(
     tileStates: number[][],
   ) {
     let monsterState = [...monster];
-    if (tileStates[newx][newy] >= 10 && tileStates[newx][newy] < 14) {
+    if (tileStates[newy][newx] >= 10 && tileStates[newy][newx] < 14) {
       monsterState.shift();
       if (monsterState.length > 0)
       {
@@ -186,11 +190,11 @@ export function updateBoard(
 
       if(monsterState.length == 1)
       {
-        tileStatesCopy[oldx][oldy] = 0;
+        tileStatesCopy[oldy][oldx] = 0;
       }
       else
       {
-        tileStatesCopy[oldx][oldy] = 14;
+        tileStatesCopy[oldy][oldx] = 14;
       }
     }
     return monsterState;
@@ -219,10 +223,9 @@ export function updateBoard(
     dir = greedyDecision(direction, 3, gridHeight, gridWidth);
   }
 
-  moveMonster(monster[0][0] + directionMove[dir][0], monster[0][1] + directionMove[dir][1], tileStates);
-
+  setMonster(moveMonster(monster[0][0] + directionMove[dir][0], monster[0][1] + directionMove[dir][1], tileStates));
   setFoodCnt(food);
-  setTileStates(updateTileStates(tileStatesCopy))
+  setTileStates(tileStatesCopy)
 }
 
 export function cutPlants(

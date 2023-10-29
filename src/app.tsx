@@ -9,6 +9,7 @@ const gridHeight = 25;
 const gridWidth = 40;
 
 const updateTestCase: DisplayData = [];
+
 for (let i = 0; i < 25; i++) {
   updateTestCase.push([...Array(40)].map(() => Math.round(Math.random() * 0.55)));
 }
@@ -23,8 +24,7 @@ export default function App() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setTileStates(updateTileStates(tileStates));
-      updateBoard(monster, tileStates, setTileStates, updateTileStates, gridWidth, gridHeight, lastDir, setLastDir, foodCnt, setFoodCnt);
+      updateBoard(monster, setMonster, tileStates, setTileStates, updateTileStates, gridWidth, gridHeight, lastDir, setLastDir, foodCnt, setFoodCnt);
     }, tickIntervalMs);
     return () => clearInterval(interval);
   }, [tileStates]);
