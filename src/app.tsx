@@ -1,16 +1,8 @@
 import { ChangeEvent, useState } from "react";
 import Board from "./components/board";
 import ControlButtons from "./components/ui/controlButtons";
+import machineAppear from "./logics/machineAppear";
 
-type DisplayData = number[][];
-
-const updateTestCase: DisplayData = [];
-for (let i = 0; i < 25; i++) {
-  updateTestCase.push([...Array(40)].map(() => Math.round(Math.random() * 0.55)));
-}
-updateTestCase[0][0] = 4;
-
-let initMachineData = [[0, 0], [-1, 0], [-2, 0], [-3, 0], [-4, 0], [-5, 0]];
 
 export default function App() {
   const [tickIntervalMs, setTickIntervalMs] = useState(500);
@@ -26,6 +18,17 @@ export default function App() {
       setTickPaused(!tickPaused);
     }
   }
+
+  type DisplayData = number[][];
+
+  let updateTestCase: DisplayData = [];
+  for (let i = 0; i < 25; i++) {
+    updateTestCase.push([...Array(40)].map(() => Math.round(Math.random() * 0.55)));
+  }
+
+  let initMachineData = [[0, 0], [-1, 0], [-2, 0], [-3, 0], [-4, 0], [-5, 0]];
+
+  [initMachineData, updateTestCase] = machineAppear(40, 25, initMachineData, updateTestCase);
 
   return (
     <div className="w-screen h-screen flex content-center justify-center flex-wrap" >

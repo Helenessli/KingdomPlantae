@@ -184,13 +184,19 @@ export default function machine(
         let len = machineDataCopy.length;
         let [lastx, lasty] = machineDataCopy[len - 1];
         //checks if these coordinates are found in another part of the snake
-        displayDataCopy[lasty][lastx] = 0;
+        if (lastx >= 0 && lastx < gridWidth && lasty >= 0 && lasty < gridHeight)
+        {
+          displayDataCopy[lasty][lastx] = 0;
+        }
         for (let i = 0; i < len - 2; i++)
         {
           let coord = machineDataCopy[i]
           if (coord[0] == lastx && coord[1] == lasty)
           {
-            displayDataCopy[lasty][lastx] = 14;
+            if (lastx >= 0 && lastx < gridWidth && lasty >= 0 && lasty <= gridHeight)
+            {
+              displayDataCopy[lasty][lastx] = 14;
+            }
           }
         }
         machineDataCopy.pop();
@@ -220,13 +226,16 @@ export default function machine(
   } else {
     //check only 3 sides
     let direction = ["up", "left", "down"];
-    if (machineData[0][0] - machineData[1][0] == 0) {
-      direction =
-        machineData[0][1] == machineData[1][1] + 1
-          ? ["left", "down", "right"]
-          : ["left", "up", "right"];
-    } else if (machineData[0][1] == machineData[1][1] + 1)
+    if (lastDir == "down") {
+      direction = ["right", "left", "down"];
+    } else if (lastDir == "right")
+    {
       direction = ["up", "right", "down"];
+    }
+    else if (lastDir == "up")
+    {
+      direction = ["right", "left", "up"];
+    }
 
     dir = greedyDecision(direction, 3, gridHeight, gridWidth);
   }
