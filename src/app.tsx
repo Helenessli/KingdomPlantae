@@ -12,6 +12,7 @@ updateTestCase[11][10] = 14;
 updateTestCase[12][10] = 14;
 updateTestCase[13][10] = 14;
 updateTestCase[14][10] = 14;
+updateTestCase[15][10] = 14;
 let initMachineData = [[10, 10], [11, 10], [12, 10], [13, 10], [14, 10], [15, 10]];
 
 export default function App() {
