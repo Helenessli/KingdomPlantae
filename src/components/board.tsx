@@ -32,7 +32,7 @@ export default function Board(
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (updateTimes < 20) {
+      if (updateTimes < 20 || !tickPaused) {
         const [d, m] = updateBoard(displayData, machineData, gridWidth,
           gridHeight,
           lastDir,
@@ -43,6 +43,9 @@ export default function Board(
         setMachineData(m);
         updateTimes++;
       }
+      // else if (updateTimes === 20){
+      //   handleChange();
+      // }
     }, tickInterval);
     return () => clearInterval(interval);
   }, [displayData, machineData]);
