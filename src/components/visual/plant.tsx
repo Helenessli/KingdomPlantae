@@ -13,6 +13,11 @@ export default function Plant(
   { plantType, hasBomb, pause }: 
   { plantType: number, hasBomb: boolean, pause: boolean }
 ) {
-  if (plantType == 0) return <div className = "w-[25px] h-[25px]" id = { (pause) ? "hover_plant" : "" } />;
-  return <Diamond plantType = { plantType } background = { (hasBomb) ? "#910b0b" : "" } />
+  if (plantType == 0) return <div className = "w-[25px] h-[25px]" 
+    id = { (pause) ? "hover_plant" : "" } 
+    style = {{ backgroundColor : (hasBomb) ? "var(--bomb-color)" : "" }}
+  />;
+  return <Diamond plantType = { plantType } 
+    background = { (hasBomb) ? "var(--bomb-color)" : "" }
+  />
 }

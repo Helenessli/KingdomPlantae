@@ -11,8 +11,8 @@ type MachineData = number[][];
 let updateTimes = 0;
 
 export default function Board(
-  { initDisplayData, initMachineData, tickInterval, tickPaused}: 
-  { initDisplayData: DisplayData, initMachineData: MachineData, tickInterval: number, tickPaused: boolean}
+  { initDisplayData, initMachineData, tickInterval }: 
+  { initDisplayData: DisplayData, initMachineData: MachineData, tickInterval: number }
 ) {
   const [ displayData, setDisplayData ] = useState(initDisplayData);
   const [ machineData, setMachineData ] = useState(initMachineData);
