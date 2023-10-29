@@ -6,9 +6,11 @@ export function updateBoard(
   gridWidth: number,
   gridHeight: number,
   lastDir: string,
-  setLastDir: any
+  setLastDir: any,
+  foodCnt: number,
+  setFoodCnt: any,
 ) {
-  const tileStatesCopy = [...tileStates];
+  const tileStatesCopy:any = [...tileStates];
 
   const directionMove: any = {
     down: [0, 1],
@@ -16,6 +18,16 @@ export function updateBoard(
     right: [1, 0],
     left: [-1, 0],
   };
+
+  const headDirection: any = {
+    up: 4,
+    down: 5,
+    left: 6,
+    right: 7
+  }
+
+  let food = foodCnt;
+
   function checkGrass(dir: String, gridHeight: number, gridWidth: number) {
     //checks for grass and returns num of grass it can eat, and in the area
     let xi = 0;
@@ -129,20 +141,57 @@ export function updateBoard(
     setLastDir(dir);
     return dir;
   }
-  function moveMonster( //add more logic
+  function moveMonster( 
     newx: number,
     newy: number,
     tileStates: number[][],
-    grow: boolean //true if foodCnt reaches 20
   ) {
     let monsterState = [...monster];
     if (tileStates[newx][newy] >= 10 && tileStates[newx][newy] < 14) {
       monsterState.shift();
+      if (monsterState.length > 0)
+      {
+        tileStatesCopy[newy][newx] = headDirection[lastDir];
+      }
+      else
+      {
+        tileStatesCopy[newy][newx] = 0;
+      }
     }
     else {
-      
       monsterState.unshift([newx, newy]);
-      if (!grow) monsterState.pop();
+
+      let grow = false;
+
+      if (tileStatesCopy[newy][newx] > 0 && tileStatesCopy[newy][newx] < 5)
+      {
+        food += tileStatesCopy[newy][newx];
+        if (food >= 20)
+        {
+          grow = true;
+          food = food % 20;
+        }
+      }
+
+      tileStatesCopy[newy][newx] = headDirection[lastDir]; //head orientation
+      let [oldx, oldy] = monsterState[1];
+
+      if (!grow) //grow if food cnt reaches 20 after it eats
+      {
+        let len = monsterState.length
+        let [lastx, lasty] = monsterState[len - 1];
+        tileStatesCopy[lasty][lastx] = 0;
+        monsterState.pop();
+      }
+
+      if(monsterState.length == 1)
+      {
+        tileStatesCopy[oldx][oldy] = 0;
+      }
+      else
+      {
+        tileStatesCopy[oldx][oldy] = 14;
+      }
     }
     return monsterState;
   }
@@ -170,10 +219,10 @@ export function updateBoard(
     dir = greedyDecision(direction, 3, gridHeight, gridWidth);
   }
 
-  moveMonster(monster[0][0] + directionMove[dir][0], monster[0][1] + directionMove[dir][1], tileStates, false);
+  moveMonster(monster[0][0] + directionMove[dir][0], monster[0][1] + directionMove[dir][1], tileStates);
 
-
-  setTileStates()
+  setFoodCnt(food);
+  setTileStates(updateTileStates(tileStatesCopy))
 }
 
 export function cutPlants(

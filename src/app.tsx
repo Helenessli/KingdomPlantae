@@ -27,7 +27,7 @@ export default function App() {
   useEffect(() => {
     const interval = setInterval(() => {
       setTileStates(updateTileStates(tileStates));
-      setMonster(updateBoard(monster, tileStates, setTileStates, updateTileStates, gridWidth, gridHeight, lastDir, setLastDir));
+      setMonster(updateBoard(monster, tileStates, setTileStates, updateTileStates, gridWidth, gridHeight, lastDir, setLastDir, foodCnt, setFoodCnt));
     }, tickIntervalMs);
     return () => clearInterval(interval);
   }, [tileStates]);
