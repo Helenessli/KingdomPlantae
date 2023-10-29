@@ -8,8 +8,6 @@ import razor from "../logics/razor";
 type DisplayData = number[][];
 type MachineData = number[][];
 
-let updateTimes = 0;
-
 export default function Board(
   { initDisplayData, initMachineData, tickInterval, 
     gridWidth,
@@ -27,10 +25,12 @@ export default function Board(
 ) {
   const [ displayData, setDisplayData ] = useState(initDisplayData);
   const [ machineData, setMachineData ] = useState(initMachineData);
+  
+  const [ updateTimes, setUpdateTimes ] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (updateTimes < 10000) {
+      if (updateTimes < 20) {
         const [ d, m ] = updateBoard(displayData, machineData, gridWidth,
         gridHeight,
         lastDir,
@@ -39,13 +39,15 @@ export default function Board(
         setFoodCnt);
         setDisplayData(d);
         setMachineData(m);
-        updateTimes++;
+        setUpdateTimes(updateTimes + 1);
       }
     }, tickInterval);
     return () => clearInterval(interval);
-  }, [displayData, machineData]);
+  }, [displayData, machineData, updateTimes]);
 
-  return <Grid displayData = { displayData } pause = { updateTimes == 20 } />;
+  return <Grid displayData = { displayData } 
+    pause = { updateTimes == 20 } 
+  />;
 }
 
 function updateBoard(displayData: DisplayData, machineData: MachineData, gridWidth: number, gridHeight: number, lastDir: string, setLastDir: any, foodCnt: number, setFoodCnt: any, ) {

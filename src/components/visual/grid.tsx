@@ -1,5 +1,6 @@
-import Plant from "./plant";
+import { useState } from "react";
 
+import Plant from "./plant";
 import Razor from "./razor";
 import { MachineHead, MachineBody } from "./machine";
 
@@ -11,9 +12,10 @@ export default function Grid(
   { displayData, pause }: 
   { displayData: DisplayData, pause: boolean }
 ) {
+
   let h = displayData.length;
   let w = (displayData.length == 0) ? 0 : displayData[0].length;
-  
+
   return (
     <div className = "bg-[--dirt-color] border-[10px] " >
       {[...Array(h)].map((_v, i) =>
