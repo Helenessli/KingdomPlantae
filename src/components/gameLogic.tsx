@@ -1,14 +1,18 @@
-export function movementDecision(
+export function updateBoard(
   monster: number[][],
   tileStates: number[][],
+  setTileStates: any,
+  updateTileStates: any,
   gridWidth: number,
   gridHeight: number,
   lastDir: string,
   setLastDir: any
 ) {
+  const tileStatesCopy = [...tileStates];
+
   const directionMove: any = {
-    up: [0, 1],
-    down: [0, -1],
+    down: [0, 1],
+    up: [0, -1],
     right: [1, 0],
     left: [-1, 0],
   };
@@ -26,14 +30,14 @@ export function movementDecision(
     let res = 0;
     let food = 0;
 
-    if (dir == "up") {
+    if (dir == "down") {
       xi = -2;
       xf = 2;
       yi = 1;
       yf = 5;
     }
 
-    if (dir == "down") {
+    if (dir == "up") {
       xi = -2;
       xf = 2;
       yi = -5;
@@ -125,15 +129,21 @@ export function movementDecision(
     setLastDir(dir);
     return dir;
   }
-  function moveMonster(newx: number, newy: number) {
+  function moveMonster( //add more logic
+    newx: number,
+    newy: number,
+    tileStates: number[][],
+    grow: boolean //true if foodCnt reaches 20
+  ) {
     let monsterState = [...monster];
-
-    for (let i = monster.length - 1; i > 0; i--) {
-      monsterState[i][0] = monster[i - 1][0];
-      monsterState[i][1] = monster[i - 1][1];
+    if (tileStates[newx][newy] >= 10 && tileStates[newx][newy] < 14) {
+      monsterState.shift();
     }
-    monsterState[0][0] = newx;
-    monsterState[0][1] = newy;
+    else {
+      
+      monsterState.unshift([newx, newy]);
+      if (!grow) monsterState.pop();
+    }
     return monsterState;
   }
 
@@ -152,17 +162,18 @@ export function movementDecision(
     if (monster[0][0] - monster[1][0] == 0) {
       direction =
         monster[0][1] == monster[1][1] + 1
-          ? ["left", "up", "right"]
-          : ["left", "down", "right"];
+          ? ["left", "down", "right"]
+          : ["left", "up", "right"];
     } else if (monster[0][1] == monster[1][1] + 1)
       direction = ["up", "right", "down"];
 
     dir = greedyDecision(direction, 3, gridHeight, gridWidth);
   }
-  let res = moveMonster(monster[0][0] + directionMove[dir][0], monster[0][1] + directionMove[dir][1]);
-  console.log(`x: ${res[0][0]}, y: ${res[0][1]}`)//x and y)
-  //update the movement and then update headposition
-  return 
+
+  moveMonster(monster[0][0] + directionMove[dir][0], monster[0][1] + directionMove[dir][1], tileStates, false);
+
+
+  setTileStates()
 }
 
 export function cutPlants(
