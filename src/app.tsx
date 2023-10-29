@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 import Grid from "./components/visual/grid";
-import TickSlider from "./components/visual/tickSlider";
+import TickSlider from "./components/tickSlider";
 
 type TileStates = Array<Array<number>>;
 

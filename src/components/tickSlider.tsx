@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 
-export default function TickSlider({ tickIntervalMs, setTickIntervalMs }: { tickIntervalMs: number, setTickIntervalMs: (tickintervalMs: number) => void }) {
+export default function TickSlider({ tickIntervalMs, setTickIntervalMs }: { tickIntervalMs: number, setTickIntervalMs: (tickintervalMs: number) => any }) {
   
   
 
   return (
     <div className="slidecontainer">
-      <input type="range" min="50" max="1000" value={tickIntervalMs} className="tickSlider"/>
+      <button onClick={setTickIntervalMs(500)}/>
     </div>
   );
 }
