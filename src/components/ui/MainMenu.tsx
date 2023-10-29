@@ -1,5 +1,5 @@
 import React from "react";
-import App from '../app';
+import App from '../../app';
 
 export default function MainMenu() {
   
@@ -11,7 +11,6 @@ export default function MainMenu() {
   );
 
   function startGame() {
-
     
   }
 }

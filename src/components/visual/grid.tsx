@@ -1,17 +1,31 @@
-import Tile from "./tile";
+import Plant from "./plant";
 
-type TileStates = Array<Array<number>>;
+import Razor from "./razor";
+import { MachineHead, MachineBody } from "./machine";
 
-export default function Grid({ tileStates }: { tileStates: TileStates }) {
-  let h = tileStates.length;
-  let w = (tileStates.length == 0) ? 0 : tileStates[0].length;
+import "./grid.css";
 
+type DisplayData = number[][];
+
+export default function Grid({ displayData }: { displayData: DisplayData }) {
+  let h = displayData.length;
+  let w = (displayData.length == 0) ? 0 : displayData[0].length;
+  
   return (
-    <div className = "bg-[#a7594c]" >
-      {[...Array(h)].map( (_v, i) => 
-        <div className = "flex flex-row" key = { i } >
-          {[...Array(w)].map( (_v, j) => 
-            <Tile tileState = { tileStates[i][j] } key = { j } /> 
+    <div className = "bg-[--dirt-color] border-[10px] " >
+      {[...Array(h)].map((_v, i) =>
+        <div className="flex flex-row" key = { i } >
+          {[...Array(w)].map((_v, j) =>
+            (() => {
+              let tileType = displayData[i][j];
+              if (4 <= tileType && tileType <= 7) 
+                return <MachineHead direction = { tileType - 4 } key = { j } />;
+              if (tileType == 14) 
+                return <MachineBody key = { j } />;
+              if (tileType == 8 || tileType == 9) 
+                return <Razor hasBomb = { tileType == 9 } key = { j } />; 
+              return <Plant plantType = { tileType % 10 } hasBomb = { tileType >= 10 } key = { j } />;
+            })()
           )}
         </div>
       )}
