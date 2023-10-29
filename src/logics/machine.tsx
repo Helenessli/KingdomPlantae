@@ -183,7 +183,16 @@ export default function machine(
       {
         let len = machineDataCopy.length;
         let [lastx, lasty] = machineDataCopy[len - 1];
+        //checks if these coordinates are found in another part of the snake
         displayDataCopy[lasty][lastx] = 0;
+        for (let i = 0; i < len - 2; i++)
+        {
+          let coord = machineDataCopy[i]
+          if (coord[0] == lastx && coord[1] == lasty)
+          {
+            displayDataCopy[lasty][lastx] = 14;
+          }
+        }
         machineDataCopy.pop();
       }
 

@@ -30,7 +30,7 @@ export default function Board(
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (updateTimes < 20) {
+      if (updateTimes < 10000) {
         const [ d, m ] = updateBoard(displayData, machineData, gridWidth,
         gridHeight,
         lastDir,
