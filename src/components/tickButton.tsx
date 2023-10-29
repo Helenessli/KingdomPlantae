@@ -1,12 +1,17 @@
-import { useState, useEffect } from "react";
+// UNUSED
+// MAY BE DELETED
 
-export default function TickSlider({ tickIntervalMs, setTickIntervalMs }: { tickIntervalMs: number, setTickIntervalMs: (tickintervalMs: number) => any }) {
-  
-  
+
+
+
+
+import { useCallback, useRef, useState, useEffect } from "react";
+
+export default function TickButton({ tickIntervalMs, setTickIntervalMs }: { tickIntervalMs: number, setTickIntervalMs: (tickintervalMs: number) => any }) {
 
   return (
-    <div className="slidecontainer">
-      <button onClick={setTickIntervalMs(500)}/>
+    <div className="">
+      <button className="border-2 border-black" onClick={() => setTickIntervalMs((tickIntervalMs+400)%1200)}>TEST</button>
     </div>
   );
 }
