@@ -1,4 +1,5 @@
-import React from "react";
+import React, { MouseEventHandler } from "react";
+import "./game.css";
 const CELL_SIZE = 15;
 const WIDTH = 800;
 const HEIGHT = 600;
@@ -89,7 +90,32 @@ class Game extends React.Component {
     }
     return board;
   }
+  makeCells() {
+    let cells = [];
+    for (let y = 0; y < this.rows; y++) {
+      for (let x = 0; x < this.cols; x++) {
+        if (this.board[y][x]) {
+          cells.push({ x, y });
+        }
+      }
+    }
+    return cells;
+  }
+  handleClick = (event: { clientX: number; clientY: number }) => {
+    // const elemOffset = this.getElementOffset();
+    const offsetX = event.clientX; //- elemOffset.x;
+    const offsetY = event.clientY; //- elemOffset.y;
 
+    const x = Math.floor(offsetX / CELL_SIZE);
+    const y = Math.floor(offsetY / CELL_SIZE);
+
+    if (x >= 0 && x <= this.cols && y >= 0 && y <= this.rows) {
+      if (this.board[x][y] == 0) {
+        this.board[y][x] = 1;
+      }
+    }
+    this.setState({ cells: this.makeCells() });
+  };
   calculateNeighbors(board: number[][], x: number, y: number) {
     let neighbors: number[] = [0, 0, 0, 0];
     const dirs = [
@@ -131,7 +157,18 @@ class Game extends React.Component {
   }
 
   render() {
-    return <div></div>;
+    return (
+      <div>
+        <div
+          className="Board"
+          style={{
+            width: WIDTH,
+            height: HEIGHT,
+            backgroundSize: `${CELL_SIZE}px ${CELL_SIZE}px`,
+          }}
+        ></div>
+      </div>
+    );
   }
 }
 
