@@ -1,25 +1,38 @@
 import { useState, useEffect } from "react";
+import { movementDecision } from "./components/machineLogic";
 
 import Grid from "./components/visual/grid";
-import TickSlider from "./components/visual/tickSlider";
+import TickSlider from "./components/tickSlider";
 
 type TileStates = Array<Array<number>>
+
+//CONSTANTS
+const gridWidth: number = 40; //number of tiles wide
+const gridHeight: number = 25; //number of tiles high
 
 const updateTestCase: TileStates = []
 for (let i = 0; i < 25; i++) {
   updateTestCase.push([...Array(40)].map(() => Math.round(Math.random() * 0.55)));
 }
 
+
 export default function App() {
   const [tileStates, setTileStates] = useState(updateTestCase);
-  const [tickIntervalMs, setTickIntervalMs] = useState(50);
+  const [tickIntervalMs, setTickIntervalMs] = useState(500);
+  const [monster, setMonster]: any = useState([[0, 0]]); //x,y coordinates of each monster part
+  const [lastDir, setLastDir] = useState("unknown");
+  const [razor, setRazor]: any = useState([]); //3x3 boolean grid showing current razor configuration
+  const [foodCnt, setFoodCnt]: any = useState(0); //resets to zero after reaching 20
 
   useEffect(() => {
     const interval = setInterval(() => {
       setTileStates(updateTileStates(tileStates));
+      let x = movementDecision(monster, tileStates, gridWidth, gridHeight, lastDir, setLastDir);
     }, tickIntervalMs);
     return () => clearInterval(interval);
   }, [tileStates]);
+
+  
 
   return (
     <div className="w-screen h-screen flex content-center justify-center flex-wrap" >
@@ -60,6 +73,8 @@ function updateTileStates(tileStates: TileStates): TileStates {
       }
     }
   }
+
+  
 
   return copy;
 }
