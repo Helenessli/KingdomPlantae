@@ -1,6 +1,8 @@
 import Tile from "./tile";
 
-export default function Grid({ tileStates }: { tileStates: Array<Array<number>> }) {
+type TileStates = Array<Array<number>>;
+
+export default function Grid({ tileStates }: { tileStates: TileStates }) {
   let h = tileStates.length;
   let w = (tileStates.length == 0) ? 0 : tileStates[0].length;
 
