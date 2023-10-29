@@ -178,7 +178,7 @@ export function updateBoard(
 
       if (!grow) //grow if food cnt reaches 20 after it eats
       {
-        let len = monsterState.length
+        let len = monsterState.length;
         let [lastx, lasty] = monsterState[len - 1];
         tileStatesCopy[lasty][lastx] = 0;
         monsterState.pop();
