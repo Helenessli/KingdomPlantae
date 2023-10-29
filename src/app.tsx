@@ -1,20 +1,17 @@
 import {useCallback, useRef, useState, useEffect } from "react";
 import TickButton from "./components/tickButton";
 import { updateBoard } from "./components/gameLogic";
+import Board from "./components/board";
 
-import Grid from "./components/visual/grid";
+type DisplayData = number[][];
 
-type TileStates = Array<Array<number>>
+const gridHeight = 25;
+const gridWidth = 40;
 
-//CONSTANTS
-const gridWidth: number = 40; //number of tiles wide
-const gridHeight: number = 25; //number of tiles high
-
-const updateTestCase: TileStates = []
+const updateTestCase: DisplayData = [];
 for (let i = 0; i < 25; i++) {
   updateTestCase.push([...Array(40)].map(() => Math.round(Math.random() * 0.55)));
 }
-
 
 export default function App() {
   const [tileStates, setTileStates] = useState(updateTestCase);
@@ -35,15 +32,15 @@ export default function App() {
   
 
   return (
-    <div className="w-screen h-screen flex content-center justify-center flex-wrap" >
-      <Grid tileStates={tileStates} />
-      <button className="border-black border-2 rounded-xl w-14 h-10 mx-3"onClick={() => setTickIntervalMs((tickIntervalMs+800)%1200)}>{(tickIntervalMs === 100? "3x" : (tickIntervalMs === 500? "2x" : "1x"))}</button>
+    <div className = "w-screen h-screen flex content-center justify-center flex-wrap" >
+      <Board initialData = { updateTestCase } />
+      {/* <button className="border-black border-2 rounded-xl w-14 h-10 mx-3"onClick={() => setTickIntervalMs((tickIntervalMs+800)%1200)}>{(tickIntervalMs === 100? "3x" : (tickIntervalMs === 500? "2x" : "1x"))}</button> */}
     </div>
   );
 }
 // <TickButton tickIntervalMs={tickIntervalMs} setTickIntervalMs={() => setTickIntervalMs}/>
 
-function updateTileStates(tileStates: TileStates): TileStates {
+function updateTileStates(tileStates: DisplayData): DisplayData {
   let copy = [...tileStates].map(row => [...row]);  // Hard copy here
 
   let h = tileStates.length;
