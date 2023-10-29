@@ -47,33 +47,33 @@ export default function razor(
       for (let c = 0; c < 3; c++) {
         if (razors[r][c]) {
           if (
-            A[0] + r > 0 &&
-            A[0] + r < gridWidth &&
-            A[1] + c > 0 &&
-            A[1] + c < gridHeight
+            A[1] + r > 0 &&
+            A[1] + r < gridWidth &&
+            A[0] + c > 0 &&
+            A[0] + c < gridHeight
           ) {
             if (
               //assert 10-13
-              displayData[A[0] + r][A[1] + c] >= 10 &&
-              displayData[A[0] + r][A[1] + c] != 14
+              displayData[A[1] + r][A[0] + c] >= 10 &&
+              displayData[A[1] + r][A[0] + c] != 14
             )
-              copy[A[0] + r][A[1] + c] = 9;
-            else if (displayData[A[0] + r][A[1] + c] <= 3)
-              copy[A[0] + r][A[1] + c] = 8;
+              copy[A[1] + r][A[0] + c] = 9;
+            else if (displayData[A[1] + r][A[0] + c] <= 3)
+              copy[A[1] + r][A[0] + c] = 8;
           }
           if (
-            B[0] + r > 0 &&
-            B[0] + r < gridWidth &&
-            B[1] + c > 0 &&
-            B[1] + c < gridHeight
+            B[1] + r > 0 &&
+            B[1] + r < gridWidth &&
+            B[0] + c > 0 &&
+            B[0] + c < gridHeight
           ) {
             if (
-              displayData[B[0] + r][B[1] + c] >= 10 &&
-              displayData[B[0] + r][B[1] + c] != 14
+              displayData[B[1] + r][B[0] + c] >= 10 &&
+              displayData[B[1] + r][B[0] + c] != 14
             )
-              copy[B[0] + r][B[1] + c] = 9;
-            else if (displayData[B[0] + r][B[1] + c] <= 3)
-              copy[B[0] + r][B[1] + c] = 8;
+              copy[B[1] + r][B[0] + c] = 9;
+            else if (displayData[B[1] + r][B[0] + c] <= 3)
+              copy[B[1] + r][B[0] + c] = 8;
           }
         }
       }
