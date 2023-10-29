@@ -1,13 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import MainMenu from './MainMenu';
 
-import App from "./app";
+import App from './app';
 
-import "./index.css";
+import './index.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 
 root.render(
   <React.StrictMode>
