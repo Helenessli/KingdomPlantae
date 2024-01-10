@@ -1,6 +1,5 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was created for the UW Game Development Club Game Jam 2023. It is a combination of the game Snake and Conway's Game of Life. The "snake" strange machine has been logically programmed to move, eat, and cut the grass with every tick. At the same time, the plants have a logically programmed evolutionary cycle that grows or dies with every tick. The objective of the game is to destroy the "snake" strange machine with bombs before it eats/cuts all of the plants on the terrain. 
 
 ## Available Scripts
 
